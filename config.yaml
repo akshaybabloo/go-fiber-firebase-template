@@ -1,0 +1,4 @@
+debug: true
+#TODO: put Firebase API Key
+firebaseApiKey: ""
+version: "0.0.1"
