@@ -7,6 +7,7 @@ require (
 	firebase.google.com/go/v4 v4.6.1
 	github.com/gofiber/fiber/v2 v2.21.0
 	github.com/gofiber/helmet/v2 v2.2.3
+	github.com/spf13/viper v1.9.0
 	go.uber.org/zap v1.19.1
 	google.golang.org/api v0.60.0
 )
@@ -35,7 +36,6 @@ require (
 	github.com/spf13/cast v1.4.1 // indirect
 	github.com/spf13/jwalterweatherman v1.1.0 // indirect
 	github.com/spf13/pflag v1.0.5 // indirect
-	github.com/spf13/viper v1.9.0 // indirect
 	github.com/subosito/gotenv v1.2.0 // indirect
 	github.com/valyala/bytebufferpool v1.0.0 // indirect
 	github.com/valyala/fasthttp v1.31.0 // indirect
