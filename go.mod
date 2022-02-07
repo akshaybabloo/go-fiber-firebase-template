@@ -8,7 +8,7 @@ require (
 	github.com/gofiber/fiber/v2 v2.24.0
 	github.com/gofiber/helmet/v2 v2.2.5
 	github.com/spf13/viper v1.10.1
-	go.uber.org/zap v1.20.0
+	go.uber.org/zap v1.21.0
 	google.golang.org/api v0.64.0
 )
 
