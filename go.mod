@@ -7,7 +7,7 @@ require (
 	firebase.google.com/go/v4 v4.8.0
 	github.com/gofiber/fiber/v2 v2.32.0
 	github.com/gofiber/helmet/v2 v2.2.12
-	github.com/spf13/viper v1.10.1
+	github.com/spf13/viper v1.11.0
 	go.uber.org/zap v1.21.0
 	google.golang.org/api v0.75.0
 )
@@ -25,10 +25,11 @@ require (
 	github.com/googleapis/gax-go/v2 v2.3.0 // indirect
 	github.com/hashicorp/hcl v1.0.0 // indirect
 	github.com/klauspost/compress v1.15.0 // indirect
-	github.com/magiconair/properties v1.8.5 // indirect
+	github.com/magiconair/properties v1.8.6 // indirect
 	github.com/mitchellh/mapstructure v1.4.3 // indirect
 	github.com/pelletier/go-toml v1.9.4 // indirect
-	github.com/spf13/afero v1.6.0 // indirect
+	github.com/pelletier/go-toml/v2 v2.0.0-beta.8 // indirect
+	github.com/spf13/afero v1.8.2 // indirect
 	github.com/spf13/cast v1.4.1 // indirect
 	github.com/spf13/jwalterweatherman v1.1.0 // indirect
 	github.com/spf13/pflag v1.0.5 // indirect
@@ -49,6 +50,7 @@ require (
 	google.golang.org/genproto v0.0.0-20220414192740-2d67ff6cf2b4 // indirect
 	google.golang.org/grpc v1.45.0 // indirect
 	google.golang.org/protobuf v1.28.0 // indirect
-	gopkg.in/ini.v1 v1.66.2 // indirect
+	gopkg.in/ini.v1 v1.66.4 // indirect
 	gopkg.in/yaml.v2 v2.4.0 // indirect
+	gopkg.in/yaml.v3 v3.0.0-20210107192922-496545a6307b // indirect
 )
