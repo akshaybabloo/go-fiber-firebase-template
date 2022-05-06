@@ -5,7 +5,7 @@ go 1.17
 require (
 	cloud.google.com/go/firestore v1.6.1
 	firebase.google.com/go/v4 v4.8.0
-	github.com/gofiber/fiber/v2 v2.32.0
+	github.com/gofiber/fiber/v2 v2.33.0
 	github.com/gofiber/helmet/v2 v2.2.12
 	github.com/spf13/viper v1.11.0
 	go.uber.org/zap v1.21.0
