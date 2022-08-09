@@ -8,7 +8,7 @@ require (
 	github.com/gofiber/fiber/v2 v2.35.0
 	github.com/gofiber/helmet/v2 v2.2.14
 	github.com/spf13/viper v1.12.0
-	go.uber.org/zap v1.21.0
+	go.uber.org/zap v1.22.0
 	google.golang.org/api v0.86.0
 )
 
@@ -55,5 +55,5 @@ require (
 	google.golang.org/protobuf v1.28.0 // indirect
 	gopkg.in/ini.v1 v1.66.4 // indirect
 	gopkg.in/yaml.v2 v2.4.0 // indirect
-	gopkg.in/yaml.v3 v3.0.0 // indirect
+	gopkg.in/yaml.v3 v3.0.1 // indirect
 )
