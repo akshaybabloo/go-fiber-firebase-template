@@ -9,7 +9,7 @@ require (
 	github.com/gofiber/helmet/v2 v2.2.16
 	github.com/spf13/viper v1.13.0
 	go.uber.org/zap v1.23.0
-	google.golang.org/api v0.96.0
+	google.golang.org/api v0.97.0
 )
 
 require (
