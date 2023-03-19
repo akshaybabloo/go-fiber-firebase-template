@@ -6,7 +6,7 @@ require (
 	cloud.google.com/go/firestore v1.9.0
 	firebase.google.com/go/v4 v4.10.0
 	github.com/gofiber/fiber/v2 v2.42.0
-	github.com/gofiber/helmet/v2 v2.2.23
+	github.com/gofiber/helmet/v2 v2.2.24
 	github.com/spf13/viper v1.15.0
 	go.uber.org/zap v1.24.0
 	google.golang.org/api v0.114.0
