@@ -3,7 +3,7 @@ module github.com/akshaybabloo/go-fiber-template
 go 1.17
 
 require (
-	cloud.google.com/go/firestore v1.9.0
+	cloud.google.com/go/firestore v1.11.0
 	firebase.google.com/go/v4 v4.11.0
 	github.com/gofiber/fiber/v2 v2.47.0
 	github.com/gofiber/helmet/v2 v2.2.26
@@ -13,11 +13,11 @@ require (
 )
 
 require (
-	cloud.google.com/go v0.110.0 // indirect
+	cloud.google.com/go v0.110.2 // indirect
 	cloud.google.com/go/compute v1.19.3 // indirect
 	cloud.google.com/go/compute/metadata v0.2.3 // indirect
 	cloud.google.com/go/iam v0.13.0 // indirect
-	cloud.google.com/go/longrunning v0.4.1 // indirect
+	cloud.google.com/go/longrunning v0.5.0 // indirect
 	cloud.google.com/go/storage v1.30.1 // indirect
 	github.com/MicahParks/keyfunc v1.9.0 // indirect
 	github.com/andybalholm/brotli v1.0.5 // indirect
