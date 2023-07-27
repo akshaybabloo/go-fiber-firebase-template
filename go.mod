@@ -9,7 +9,7 @@ require (
 	github.com/gofiber/helmet/v2 v2.2.26
 	github.com/spf13/viper v1.16.0
 	go.uber.org/zap v1.24.0
-	google.golang.org/api v0.132.0
+	google.golang.org/api v0.133.0
 )
 
 require (
@@ -62,7 +62,7 @@ require (
 	google.golang.org/appengine/v2 v2.0.2 // indirect
 	google.golang.org/genproto v0.0.0-20230706204954-ccb25ca9f130 // indirect
 	google.golang.org/genproto/googleapis/api v0.0.0-20230706204954-ccb25ca9f130 // indirect
-	google.golang.org/genproto/googleapis/rpc v0.0.0-20230711160842-782d3b101e98 // indirect
+	google.golang.org/genproto/googleapis/rpc v0.0.0-20230720185612-659f7aaaa771 // indirect
 	google.golang.org/grpc v1.56.2 // indirect
 	google.golang.org/protobuf v1.31.0 // indirect
 	gopkg.in/ini.v1 v1.67.0 // indirect
