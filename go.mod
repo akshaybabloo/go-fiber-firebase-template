@@ -3,7 +3,7 @@ module github.com/akshaybabloo/go-fiber-template
 go 1.17
 
 require (
-	cloud.google.com/go/firestore v1.11.0
+	cloud.google.com/go/firestore v1.12.0
 	firebase.google.com/go/v4 v4.12.0
 	github.com/gofiber/fiber/v2 v2.48.0
 	github.com/gofiber/helmet/v2 v2.2.26
