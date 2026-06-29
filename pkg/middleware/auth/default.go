@@ -1,75 +1,56 @@
 package auth
 
 import (
-	"context"
-	"net/http"
 	"strings"
 
 	"github.com/gofiber/fiber/v3"
+	"go.uber.org/zap"
 
-	"github.com/akshaybabloo/go-fiber-template/model"
 	"github.com/akshaybabloo/go-fiber-template/pkg/factory"
+	"github.com/akshaybabloo/go-fiber-template/pkg/problem"
 )
 
-// Auth middleware verifies your access tokens before proceeding to the request
+const bearerPrefix = "Bearer "
+
+// Auth middleware verifies the Firebase ID token in the Authorization header
+// before proceeding to the request. The verified token is stored in the
+// request locals under "userToken".
 func Auth(f *factory.Factory) fiber.Handler {
-
 	return func(c fiber.Ctx) error {
-
-		firebaseConfig := f.FirebaseConfig()
-		defer f.Zap.Sync()
-
-		authToken := c.Get(fiber.HeaderAuthorization)
-		if authToken == "" {
-			return c.Status(http.StatusForbidden).JSON(model.ProblemDetails{
-				Type:     "https://tools.ietf.org/html/rfc7231#section-6.5.3",
-				Status:   http.StatusForbidden,
-				Detail:   "Authorization header is missing",
-				Instance: c.OriginalURL(),
-				Title:    "Header missing",
-			})
+		authHeader := c.Get(fiber.HeaderAuthorization)
+		if authHeader == "" {
+			return unauthorized(c, f, "Header missing", "Authorization header is missing")
 		}
 
-		splitToken := strings.Split(authToken, "Bearer")
-		if len(splitToken) != 2 {
-			return c.Status(http.StatusForbidden).JSON(model.ProblemDetails{
-				Type:     "https://tools.ietf.org/html/rfc7231#section-6.5.3",
-				Status:   http.StatusForbidden,
-				Detail:   "Malformed token, make sure you follow - 'Bearer <token>' in 'Authorization' header",
-				Instance: c.OriginalURL(),
-				Title:    "Invalid token",
-			})
+		if len(authHeader) <= len(bearerPrefix) || !strings.EqualFold(authHeader[:len(bearerPrefix)], bearerPrefix) {
+			return unauthorized(c, f, "Invalid token",
+				"Malformed token, make sure you follow - 'Bearer <token>' in 'Authorization' header")
 		}
 
-		reqToken := strings.TrimSpace(splitToken[1])
+		reqToken := strings.TrimSpace(authHeader[len(bearerPrefix):])
+		if reqToken == "" {
+			return unauthorized(c, f, "Invalid token",
+				"Malformed token, make sure you follow - 'Bearer <token>' in 'Authorization' header")
+		}
 
-		ctx := context.Background()
-		client, err := firebaseConfig.FirebaseAuth()
+		token, err := f.VerifyIDToken(c.Context(), reqToken)
 		if err != nil {
-			f.Zap.Sugar().Errorf("error getting auth app: %v", err)
-			return c.Status(http.StatusInternalServerError).JSON(model.ProblemDetails{
-				Type:     "https://tools.ietf.org/html/rfc7231#section-6.6.1",
-				Status:   http.StatusInternalServerError,
-				Detail:   "Internal server error",
-				Instance: c.OriginalURL(),
-				Title:    "Server error",
-			})
-		}
-
-		token, err := client.VerifyIDToken(ctx, reqToken)
-		if err != nil {
-			f.Zap.Sugar().Errorf("error verifying ID token: %v", err)
-			return c.Status(http.StatusUnauthorized).JSON(model.ProblemDetails{
-				Type:     "https://tools.ietf.org/html/rfc7235#section-3.1",
-				Status:   http.StatusUnauthorized,
-				Detail:   "Invalid token provided",
-				Instance: c.OriginalURL(),
-				Title:    "Unauthorised request",
-			})
+			f.Zap.Error("verifying ID token", zap.Error(err))
+			return unauthorized(c, f, "Unauthorised request", "Invalid token provided")
 		}
 
 		c.Locals("userToken", token)
 
 		return c.Next()
 	}
+}
+
+// unauthorized writes an RFC 9457 problem response with a 401 status and the
+// WWW-Authenticate header, as required for missing or invalid credentials.
+func unauthorized(c fiber.Ctx, f *factory.Factory, title, detail string) error {
+	c.Set(fiber.HeaderWWWAuthenticate, "Bearer")
+	return c.Status(fiber.StatusUnauthorized).JSON(
+		f.Problems.UnauthorizedProblem(title, detail, c.OriginalURL()),
+		problem.MIMEApplicationProblemJSON,
+	)
 }

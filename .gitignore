@@ -15,3 +15,12 @@
 # vendor/
 
 .idea/
+
+# Firebase / Google Cloud service-account credentials — never commit these.
+# Keep the *.example.json templates; ignore any real credential JSON.
+config/firebase_config.json
+*service-account*.json
+*serviceAccount*.json
+*-credentials.json
+gcloud-key*.json
+!*.example.json
