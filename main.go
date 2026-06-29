@@ -95,7 +95,7 @@ func main() {
 	}
 
 	// TODO: Add routers here
-	app.Get("/", router.Home(f))
+	app.Get("/", router.HomeRoute(f))
 
 	// handles 404s
 	app.Use(func(c *fiber.Ctx) error {
