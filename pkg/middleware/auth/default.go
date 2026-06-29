@@ -5,16 +5,16 @@ import (
 	"net/http"
 	"strings"
 
-	"github.com/gofiber/fiber/v2"
+	"github.com/gofiber/fiber/v3"
 
 	"github.com/akshaybabloo/go-fiber-template/model"
 	"github.com/akshaybabloo/go-fiber-template/pkg/factory"
 )
 
 // Auth middleware verifies your access tokens before proceeding to the request
-func Auth(f *factory.Factory) func(ctx *fiber.Ctx) error {
+func Auth(f *factory.Factory) fiber.Handler {
 
-	return func(c *fiber.Ctx) error {
+	return func(c fiber.Ctx) error {
 
 		firebaseConfig := f.FirebaseConfig()
 		defer f.Zap.Sync()

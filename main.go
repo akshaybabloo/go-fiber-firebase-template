@@ -4,12 +4,12 @@ import (
 	"fmt"
 	"os"
 
-	"github.com/gofiber/fiber/v2"
-	"github.com/gofiber/fiber/v2/middleware/cors"
-	"github.com/gofiber/fiber/v2/middleware/logger"
-	"github.com/gofiber/fiber/v2/middleware/recover"
-	"github.com/gofiber/fiber/v2/middleware/requestid"
-	"github.com/gofiber/helmet/v2"
+	"github.com/gofiber/fiber/v3"
+	"github.com/gofiber/fiber/v3/middleware/cors"
+	"github.com/gofiber/fiber/v3/middleware/helmet"
+	"github.com/gofiber/fiber/v3/middleware/logger"
+	"github.com/gofiber/fiber/v3/middleware/recover"
+	"github.com/gofiber/fiber/v3/middleware/requestid"
 	"github.com/spf13/viper"
 	"go.uber.org/zap"
 
@@ -58,7 +58,7 @@ func main() {
 	problems := f.Problems()
 
 	config := fiber.Config{
-		ErrorHandler: func(c *fiber.Ctx, err error) error {
+		ErrorHandler: func(c fiber.Ctx, err error) error {
 			code := fiber.StatusInternalServerError
 
 			// Check if it's an fiber.Error type
@@ -71,10 +71,6 @@ func main() {
 
 			return c.Status(fiber.StatusInternalServerError).JSON(problems.InternalServerErrorProblem("Unknown error", "An error occurred internally and we are looking into it", c.OriginalURL()))
 		},
-	}
-
-	if !viper.GetBool("debug") {
-		config.DisableStartupMessage = true
 	}
 
 	app := fiber.New(config)
@@ -98,11 +94,16 @@ func main() {
 	app.Get("/", router.HomeRoute(f))
 
 	// handles 404s
-	app.Use(func(c *fiber.Ctx) error {
+	app.Use(func(c fiber.Ctx) error {
 		problems := f.Problems()
 		return c.Status(fiber.StatusNotFound).JSON(problems.PageNotFoundProblem(c.OriginalURL()))
 	})
 
-	log.Sugar().Fatal(app.Listen(port))
+	listenConfig := fiber.ListenConfig{}
+	if !viper.GetBool("debug") {
+		listenConfig.DisableStartupMessage = true
+	}
+
+	log.Sugar().Fatal(app.Listen(port, listenConfig))
 
 }
