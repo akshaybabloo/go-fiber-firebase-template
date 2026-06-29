@@ -1,4 +1,4 @@
 debug: true
-#TODO: put Firebase API Key
+# TODO: put your Firebase web API key here (if you need it client-side)
 firebaseApiKey: ""
 version: "0.0.1"
