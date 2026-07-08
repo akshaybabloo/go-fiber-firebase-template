@@ -4,7 +4,7 @@ go 1.26
 
 require (
 	cloud.google.com/go/firestore v1.22.0
-	firebase.google.com/go/v4 v4.20.0
+	firebase.google.com/go/v4 v4.21.0
 	github.com/gofiber/fiber/v3 v3.3.0
 	github.com/spf13/viper v1.21.0
 	go.uber.org/zap v1.28.0
